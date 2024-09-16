@@ -1,7 +1,5 @@
 appName: myhelmapp
 
-namespace: Webapp
-
 port: 80
 
 configmap:
