@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: { { .Values.appName } }
-  namespace: { { .Values.namespace } }
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.namepace }}
   labels:
-    app: { { .Values.appName } }
+    app: {{ .Values.appName }}
 spec:
-  replicas: { { .Values.replicas } }
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: { { .Values.appName } }
+      app: {{ .Values.appName }}
       tier: frontend
   template:
     metadata:
       labels:
-        app: { { .Values.appName } }
+        app: {{ .Values.appName }}
         tier: frontend
     spec: # Pod spec
       containers:
@@ -24,7 +24,7 @@ spec:
             - containerPort: 80
           envFrom:
             - configMapRef:
-                name: { { .Values.configmap.name } }
+                name: {{ .Values.configmap.name }}
           resources:
             requests:
               memory: "16Mi"
