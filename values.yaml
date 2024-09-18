@@ -1,5 +1,6 @@
 appName: myhelmapp
 
+replicas: 3
 
 namespace: Webapp
 
