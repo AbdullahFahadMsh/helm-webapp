@@ -2,7 +2,7 @@ appName: myhelmapp
 
 replicas: 1
 
-namespace: Webapp
+namespace: Webapp ## the deployment namespace is missing the s >> namepace!!
 
 port: 80
 
