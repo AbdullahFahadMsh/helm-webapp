@@ -20,6 +20,17 @@ spec:
       containers:
         - name: mycontainer
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          args:
+            - /bin/sh
+            - -c
+            - touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600
+            livenessProbe:
+              exec:
+                command:
+                - cat
+                - /tmp/healthy
+              initialDelaySeconds: 5
+              periodSeconds: 5
           ports:
             - containerPort: 80
           envFrom:
