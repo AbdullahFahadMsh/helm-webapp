@@ -5,7 +5,6 @@ namespace: Webapp
 
 port: 80
 
-replicas: 1  # <-- Added replicas field
 
 configmap:
   name: myhelmapp-configmap-v1
