@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.appName }}
-  namespace: {{ .Values.namepace }}
+  namespace: {{ .Values.namespace }}
   labels:
     app: {{ .Values.appName }}
 spec:
@@ -20,17 +20,6 @@ spec:
       containers:
         - name: mycontainer
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
-          args:
-           - liveness
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-              httpHeaders:
-              - name: Custom-Header
-                value: Awesome
-          initialDelaySeconds: 3
-          periodSeconds: 3
           ports:
             - containerPort: 80
           envFrom:
@@ -39,7 +28,16 @@ spec:
           resources:
             requests:
               memory: "16Mi"
-              cpu: "50m" # 500milliCPUs (1/2 CPU)
+              cpu: "50m"
             limits:
               memory: "128Mi"
               cpu: "100m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+              httpHeaders:
+              - name: Custom-Header
+                value: Awesome
+            initialDelaySeconds: 30
+            periodSeconds: 30
