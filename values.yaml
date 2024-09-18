@@ -13,5 +13,5 @@ configmap:
     CUSTOM_HEADER: 'This app was deployed with helm!'
 
 image:
-  name: registry.k8s.io/e2e-test-images/agnhost
-  tag: 2.40
+  name: k8s.io/kubernetes/test/images/agnhost
+  tag: 1.31.1
