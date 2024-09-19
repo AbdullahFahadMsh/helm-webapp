@@ -36,8 +36,5 @@ spec:
             httpGet:
               path: /
               port: 80
-              httpHeaders:
-              - name: Custom-Header
-                value: Awesome
             initialDelaySeconds: 30
             periodSeconds: 30
