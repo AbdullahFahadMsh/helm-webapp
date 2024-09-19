@@ -1,7 +1,8 @@
+Yahya: 2
 
-# replicas: 0
+Abdullah: Fahad
+Muhammed: dev
 
 configmap:
   data:
-    CUSTOM_HEADER: 'This is on the DEV environment!'
-
+    CUSTOM_HEADER: "This is on the DEV environment!"
