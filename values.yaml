@@ -14,3 +14,8 @@ configmap:
 image:
   name: nginx
   tag: latest
+
+Yahya: 2
+
+Abdullah: Fahad
+Muhammed: dev
