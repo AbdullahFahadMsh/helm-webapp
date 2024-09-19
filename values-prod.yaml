@@ -1,8 +1,15 @@
+appname: prod
 
 replicas: 4
 
 namespace: prod
 
+port: 80
+
 configmap:
   data:
     CUSTOM_HEADER: 'This is on the PROD environment!'
+
+image:
+  name: nginx
+  tag: latest
