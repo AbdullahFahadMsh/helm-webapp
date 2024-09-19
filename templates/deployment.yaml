@@ -1,40 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.Abdullah }}
-  namespace: {{ .Values.Muhammed }}
+  name: {{ .Values.name }}
   labels:
-    app: {{ .Values.Abdullah }}
+    app.kubernetes.io/name: {{ .Values.name }}
+    app.kubernetes.io/instance: {{ .Values.Release }}
 spec:
-  replicas: {{ .Values.Yahya }}
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Values.Abdullah }} 
-      tier: frontend
+      app.kubernetes.io/name: {{ .Values.name }}
+      app.kubernetes.io/instance: {{ .Values.Release }}
   template:
     metadata:
       labels:
-        app: {{ .Values.Abdullah }}
-        tier: frontend
-    spec: # Pod spec
+        app.kubernetes.io/name: {{ .Values.name }}
+        app.kubernetes.io/instance: {{ .Values.Release }}
+    spec:
       containers:
-        - name: mycontainer
-          image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+        - name: {{ .Values.name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: 80
-          envFrom:
-            - configMapRef:
-                name: {{ .Values.configmap.name }}
-          resources:
-            requests:
-              memory: "16Mi"
-              cpu: "50m"
-            limits:
-              memory: "128Mi"
-              cpu: "100m"
+            - name:  http
+              containerPort: {{ .Values.service.container_port }}
+              protocol: TCP 
+          {{- if .Values.healthcheck }}      
           livenessProbe:
-            httpGet:
-              path: /
-              port: 80
-            initialDelaySeconds: 30
-            periodSeconds: 30
+            {{- toYaml .Values.healthcheck | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.healthcheck | nindent 12 }}
+          {{end}}

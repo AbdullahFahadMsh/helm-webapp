@@ -1,21 +1,24 @@
-appName: myhelmapp
-
-replicas: 10
-
-# namespace: Webapp ## the deployment namespace is missing the s >> namepace!!
-
-port: 80
-
-configmap:
-  name: myhelmapp-configmap-v1
-  data:
-    CUSTOM_HEADER: "This app was deployed with helm!"
-
 image:
-  name: nginx
-  tag: latest
+  repository: abdullahalmeshari/demo@sha256
+  tag: 3b337d74966990d64a857ca69a03501cde5248587c8448ece2f49f02be5a9811
+  pullPolicy: IfNotPresent
 
-Yahya: 2
+replicaCount: 3
+name: suliman-app
+Release: suliman-app
 
-Abdullah: fahad
-Muhammed: dev
+healthcheck:
+  initialDelaySeconds: 10
+  failureThreshold: 2
+  successThreshold: 1
+  periodSeconds: 10
+  timeoutSeconds: 5
+  httpGet:
+    path: "/"
+    port: "http"
+
+service:
+  container_port: 3000
+  type: ClusterIP
+  name: suliman-service
+  port: 80
