@@ -1,6 +1,6 @@
 image:
   repository: abdullahalmeshari/demo@sha256
-  tag: 3b337d74966990d64a857ca69a03501cde5248587c8448ece2f49f02be5a9811
+  tag: 8937eda9969427634e0ddd5ab5cc36ab6dd106ed5ecf06b5d300dcc4e77b8251
   pullPolicy: Always
 
 replicaCount: 3
